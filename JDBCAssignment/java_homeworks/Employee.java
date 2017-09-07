@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 import java.sql.*;
 public class Employee {
-	private String firstName, lastName, timeIn, timeOut;
-	private int employeeNum;
+	protected String firstName, lastName, timeIn, timeOut;
+	protected int employeeNum;
 	public Employee(String first, String last) {
 		this.firstName = first;
 		this.lastName = last;
@@ -15,12 +15,18 @@ public class Employee {
 		Statement stmt = null;
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String URL = "jdbc:oracle:thin:@localhost:xxxx:orcl";
+			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
 			stmt = conn.createStatement();
-			String sql = "INSERT INTO Employees VALUES (employee_id_no_seq.nextval, "
+			String sql = "INSERT INTO Employees (EmployeeNo, firstName, lastName)  VALUES (employee_id_no_seq.nextval, "
 					+ this.firstName+", "+ this.lastName + ")";
 			stmt.executeQuery(sql);
+			sql = "SELECT EmployeeNo FROM Employees WHERE firstName ='"+ this.firstName + "' AND lastName ='" + this.lastName + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				this.employeeNum = rs.getInt("EmployeeNo");
+				System.out.println(this.firstName + " "+ this.lastName + ", your employee number is " + this.employeeNum + ". Use this number to clock in and out.");
+			}
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -31,5 +37,7 @@ public class Employee {
 				stmt.close();
 			}
 		}
+		inputCollector collect = new inputCollector();
+		collect.collectInput();
 	}
 }
