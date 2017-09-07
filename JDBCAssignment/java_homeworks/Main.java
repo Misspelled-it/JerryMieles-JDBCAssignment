@@ -24,7 +24,7 @@ public class Main {
 //					+ "INCREMENT BY 1 "
 //					+ "MINVALUE 1 "
 //					+ "MAXVALUE 10000";
-//			
+//			stmt.executeQuery(sql);
 //		} catch (ClassNotFoundException ex) {
 //			ex.printStackTrace();
 //		} finally {
@@ -35,6 +35,8 @@ public class Main {
 //				stmt.close();
 //			}
 //		}
+		inputCollector example = new inputCollector();
+		example.collectInput();
 	}
 
 }
