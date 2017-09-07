@@ -5,7 +5,7 @@ import java.util.*;
 import java.sql.*;
 public class Main {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 //		Connection conn = null;
 //		Statement stmt = null;
 //		try{

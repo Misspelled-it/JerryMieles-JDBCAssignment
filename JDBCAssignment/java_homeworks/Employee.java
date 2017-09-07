@@ -10,7 +10,7 @@ public class Employee {
 		this.firstName = first;
 		this.lastName = last;
 	}
-	public void createNewEmployee() throws SQLException {
+	public void createNewEmployee() throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		try{
@@ -18,8 +18,8 @@ public class Employee {
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
 			stmt = conn.createStatement();
-			String sql = "INSERT INTO Employees (EmployeeNo, firstName, lastName)  VALUES (employee_id_no_seq.nextval, "
-					+ this.firstName+", "+ this.lastName + ")";
+			String sql = "INSERT INTO Employees (EmployeeNo, firstName, lastName)  VALUES (employee_id_no_seq.nextval, '"
+					+ this.firstName+"', '"+ this.lastName + "')";
 			stmt.executeQuery(sql);
 			sql = "SELECT EmployeeNo FROM Employees WHERE firstName ='"+ this.firstName + "' AND lastName ='" + this.lastName + "'";
 			ResultSet rs = stmt.executeQuery(sql);

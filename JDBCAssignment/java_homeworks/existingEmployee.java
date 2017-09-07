@@ -1,5 +1,8 @@
 package java_homeworks;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -35,13 +38,13 @@ public class existingEmployee extends Employee{
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
 			stmt = conn.createStatement();
-			String sql = "UPDATE Employees SET time_in ='" + this.timeIn + "' WHERE EmployeeNo=" + this.employeeNum;
+			String sql = "UPDATE Employees SET time_in ='" + this.timeIn + "' WHERE EmployeeNo=" + empNo;
 			stmt.executeQuery(sql);
-			sql = "SELECT time_in FROM Employees WHERE EmployeeNo="+this.employeeNum;
+			sql = "SELECT firstName, time_in FROM Employees WHERE EmployeeNo="+ empNo;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				String in = rs.getString("time_in");
-				System.out.println(this.firstName + ", you've clocked in at " + in);
+				System.out.println(rs.getString("firstName") + ", you've clocked in at " + in);
 			}
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
@@ -63,13 +66,13 @@ public class existingEmployee extends Employee{
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
 			stmt = conn.createStatement();
-			String sql = "UPDATE Employees SET time_out ='" + this.timeOut + "' WHERE EmployeeNo=" + this.employeeNum;
+			String sql = "UPDATE Employees SET time_out ='" + this.timeOut + "' WHERE EmployeeNo=" + empNo;
 			stmt.executeQuery(sql);
-			sql = "SELECT time_out FROM Employees WHERE EmployeeNo="+this.employeeNum;
+			sql = "SELECT firstName, time_out FROM Employees WHERE EmployeeNo=" + empNo;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				String out = rs.getString("time_out");
-				System.out.println(this.firstName + ", you've clocked out at " + out);
+				System.out.println(rs.getString("firstName") + ", you've clocked out at " + out);
 			}
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
@@ -82,13 +85,12 @@ public class existingEmployee extends Employee{
 			}
 		}
 	}
-	public void editInfo(int empNo) throws SQLException {
+	public void editInfo(int empNo) throws SQLException{
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter Updated First Name:");
 		this.firstName = input.nextLine();
-		System.out.println("Enter Updated Last Name:");
+		System.out.print("Enter Updated Last Name:\n");
 		this.lastName = input.nextLine();
-		input.close();
 		Connection conn = null;
 		Statement stmt = null;
 		try{
@@ -96,7 +98,7 @@ public class existingEmployee extends Employee{
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
 			stmt = conn.createStatement();
-			String sql = "UPDATE Employees SET firstName ='" + this.firstName + "', lastName='" + this.lastName + "' WHERE EmployeeNo=" + this.employeeNum;
+			String sql = "UPDATE Employees SET firstName ='" + this.firstName + "', lastName='" + this.lastName + "' WHERE EmployeeNo=" + empNo;
 			stmt.executeQuery(sql);
 			
 		} catch (ClassNotFoundException ex) {
@@ -110,6 +112,7 @@ public class existingEmployee extends Employee{
 			}
 		}
 		System.out.println("Entry Successful, Your information has been updated");
+		input.close();
 	}
 	public void deleteEmployee(int empNo) throws SQLException {
 		Connection conn = null;
