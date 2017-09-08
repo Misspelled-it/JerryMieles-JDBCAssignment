@@ -14,6 +14,7 @@ public class Employee {
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//establish a connection with a server, insert the employee id from a sequence that is auto incremented, insert first and last name
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
@@ -21,6 +22,7 @@ public class Employee {
 			String sql = "INSERT INTO Employees (EmployeeNo, firstName, lastName)  VALUES (employee_id_no_seq.nextval, '"
 					+ this.firstName+"', '"+ this.lastName + "')";
 			stmt.executeQuery(sql);
+			//using the first and last name find the employee number and print it to the screen
 			sql = "SELECT EmployeeNo FROM Employees WHERE firstName ='"+ this.firstName + "' AND lastName ='" + this.lastName + "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
