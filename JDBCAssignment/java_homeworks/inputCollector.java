@@ -11,6 +11,7 @@ public class inputCollector {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter your Employee number:");
 		this.employeeNo = input.nextInt();
+		//prompt the user for input and handle in the existingEmployee class
 		System.out.println("What would you like to do? Enter the corresponding number:\n"
 				+ "1-Clock In\n"
 				+ "2-Clock Out\n"
@@ -24,11 +25,13 @@ public class inputCollector {
 	public void collectInput() throws SQLException{
 		int option;
 		Scanner input = new Scanner(System.in);
+		//prompt the user for input
 		System.out.println("Good day! Are you a new or existing employee? Enter corresponding number:\n"
 				+ "1-New Employee\n"
 				+ "2-Existing Employee");
 		option = input.nextInt();
 		switch(option) {
+				//if new make a new entry in the database using first and last name
 			case 1: System.out.println("Enter your First Name:");
 				this.firstName = input.next();
 				System.out.println("Enter your Last Name:");
@@ -37,6 +40,7 @@ public class inputCollector {
 				emp.createNewEmployee();
 				break;
 			case 2:
+				//if not new ask for more input
 				getEmployeeInput();
 				break;
 			default:
