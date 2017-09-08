@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class existingEmployee extends Employee{
 	public existingEmployee(int empNo, int option) throws SQLException{
 		super("","");
+		//handle the various options from the menu in input collector
 		switch (option){
 			case 1: clockIn(empNo);
 				break;
@@ -34,6 +35,7 @@ public class existingEmployee extends Employee{
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//submit the time in date and print to the user after establishing a connection to the database
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
@@ -62,6 +64,7 @@ public class existingEmployee extends Employee{
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//submit the time out date and print to the user after establishing a connection to the database
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
@@ -94,6 +97,7 @@ public class existingEmployee extends Employee{
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//make a connection to the database and change first name and last name in the database to the user provided ones
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
@@ -118,6 +122,7 @@ public class existingEmployee extends Employee{
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//the employee has left the company; delete their entry from the database using their number as a search condition
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 			conn = DriverManager.getConnection(URL,"sys as sysdba", "password123");
